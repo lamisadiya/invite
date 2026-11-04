@@ -391,7 +391,7 @@ img { max-width: 100%; }
 .pull-card {
   width: min(100%, 420px);
   margin: 28px auto 0;
-  background: linear-gradient(#fffaf2, #f3e7d2);
+  background: var(--color-gold-soft);
   color: var(--color-ink);
   border-radius: 14px;
   min-height: 210px;
@@ -412,12 +412,8 @@ img { max-width: 100%; }
   font-weight: 700;
   letter-spacing: 0.14em;
   background:
-    radial-gradient(circle at 32% 28%, #c45b6e, #7a2436 46%, #3d1018);
-  box-shadow:
-    0 8px 16px rgba(40, 8, 12, 0.35),
-    inset 0 2px 4px rgba(255, 220, 200, 0.35),
-    0 0 0 3px #d4b06a,
-    0 0 0 7px #5c321c;
+    radial-gradient(circle at 32% 28%, var(--color-gold-soft));
+
   position: relative;
 }
 .pull-note {
@@ -621,11 +617,7 @@ img { max-width: 100%; }
   border-radius: 50%;
   display: grid;
   place-items: center;
-  color: var(--color-gold-soft);
-  letter-spacing: 0.06em;
-  background: radial-gradient(circle at 32% 28%, #c45b6e, #6e2433 55%, #3c1018);
-  box-shadow: 0 0 0 3px #d4b06a, 0 0 0 6px #5c321c, 0 8px 16px rgba(40, 10, 12, 0.25);
-}
+  }
 .closing-names {
   font-family: var(--font-script);
   font-size: 40px;

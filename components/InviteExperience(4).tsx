@@ -1,14 +1,37 @@
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";
 import { invite } from "@/data/invite";
 
-const { groom: GROOM, bride: BRIDE, dateLabel: DATE_LABEL, venue: VENUE, venueFull: VENUE_FULL, mapsUrl: MAPS, photos: PHOTOS, events: EVENTS, dateISO } = invite;
+const {
+  groom: GROOM,
+  bride: BRIDE,
+  dateLabel: DATE_LABEL,
+  venue: VENUE,
+  venueFull: VENUE_FULL,
+  mapsUrl: MAPS,
+  photos: PHOTOS,
+  events: EVENTS,
+  dateISO,
+} = invite;
+
+const BG_IMAGE = "/invite/bg.webp";
+
+const burgundyBackground = {
+  backgroundImage: `url(${BG_IMAGE})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+};
 
 function calendarUrl(title: string) {
   const text = encodeURIComponent(`${title} — ${GROOM} & ${BRIDE}`);
-  const details = encodeURIComponent(`${title} of ${GROOM} and ${BRIDE} at ${VENUE_FULL}`);
+  const details = encodeURIComponent(
+    `${title} of ${GROOM} and ${BRIDE} at ${VENUE_FULL}`
+  );
   const loc = encodeURIComponent(VENUE_FULL);
+
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${invite.calendarStart}/${invite.calendarEnd}&details=${details}&location=${loc}`;
 }
 
@@ -41,26 +64,41 @@ export function InviteExperience() {
   const [photo, setPhoto] = useState(0);
   const [book, setBook] = useState<"cover" | "open" | "back">("cover");
   const [page, setPage] = useState(0);
-  const [tick, setTick] = useState({ d: "00", h: "00", m: "00", s: "00" });
+  const [tick, setTick] = useState({
+    d: "00",
+    h: "00",
+    m: "00",
+    s: "00",
+  });
   const scrollRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (phase !== "burst") return;
+
     const id = window.setTimeout(() => setPhase("open"), 1100);
     return () => window.clearTimeout(id);
   }, [phase]);
 
   useEffect(() => {
     if (phase !== "open") return;
+
     const openIfVisible = () => {
       const node = scrollRef.current;
       if (!node) return;
+
       const rect = node.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) setScrollOpen(true);
+
+      if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
+        setScrollOpen(true);
+      }
     };
+
     openIfVisible();
+
     window.addEventListener("scroll", openIfVisible, { passive: true });
+
     const timer = window.setTimeout(openIfVisible, 400);
+
     return () => {
       window.removeEventListener("scroll", openIfVisible);
       window.clearTimeout(timer);
@@ -69,15 +107,22 @@ export function InviteExperience() {
 
   useEffect(() => {
     if (phase !== "open") return;
-    const id = window.setInterval(() => setPhoto((n) => (n + 1) % PHOTOS.length), 2800);
+
+    const id = window.setInterval(
+      () => setPhoto((n) => (n + 1) % PHOTOS.length),
+      2800
+    );
+
     return () => window.clearInterval(id);
   }, [phase]);
 
   useEffect(() => {
     const target = new Date(dateISO).getTime();
+
     const run = () => {
       const diff = Math.max(0, target - Date.now());
       const pad = (n: number) => String(n).padStart(2, "0");
+
       setTick({
         d: pad(Math.floor(diff / 86400000)),
         h: pad(Math.floor((diff % 86400000) / 3600000)),
@@ -85,7 +130,9 @@ export function InviteExperience() {
         s: pad(Math.floor((diff % 60000) / 1000)),
       });
     };
+
     run();
+
     const id = window.setInterval(run, 1000);
     return () => window.clearInterval(id);
   }, []);
@@ -94,13 +141,20 @@ export function InviteExperience() {
     return (
       <section className={`envelope-screen${phase === "burst" ? " is-burst" : ""}`}>
         <div className="envelope-frame">
-          <img className="envelope-photo" src="/invite/envelope.jpg" alt="Cream invitation envelope with a wax seal" />
+          <img
+            className="envelope-photo"
+            src="/invite/envelope.jpg"
+            alt="Cream invitation envelope with a wax seal"
+          />
+
           <span className="burst" />
+
           <button
             className="seal-hit"
             aria-label="Open the invitation"
             onClick={() => setPhase("burst")}
           />
+
           <p className="tap-hint">Tap the seal</p>
         </div>
       </section>
@@ -114,10 +168,13 @@ export function InviteExperience() {
       <header className="hero">
         <img className="hero-bg" src="/invite/hero.jpg" alt="" />
         <div className="hero-shade" />
+
         <span className="lantern left" />
         <span className="lantern right" />
+
         <div className="hero-copy">
           <p className="kicker">The wedding invitation of</p>
+
           <h1 className="script-names">
             {GROOM}
             <em>&</em>
@@ -126,8 +183,14 @@ export function InviteExperience() {
         </div>
       </header>
 
-      <section className="scroll-reference-section" ref={scrollRef} aria-label="Wedding invitation scroll">
-        <div className={`scroll-reference-art${scrollOpen ? " is-open" : ""}`}>
+      <section
+        className="scroll-reference-section"
+        ref={scrollRef}
+        aria-label="Wedding invitation scroll"
+      >
+        <div
+          className={`scroll-reference-art${scrollOpen ? " is-open" : ""}`}
+        >
           <img
             src="/invite/wedding-scroll-reference.png"
             alt={`Vintage parchment wedding invitation for ${BRIDE} and ${GROOM}`}
@@ -135,12 +198,17 @@ export function InviteExperience() {
           />
         </div>
       </section>
+
       <section className="paper section center">
-        <img className="corner-flora tl" src="/invite/corner.jpg" alt="" />
-        <img className="corner-flora tr" src="/invite/corner.jpg" alt="" />
+        <img className="corner-flora tl" src="/invite/corner2.png" alt="" />
+        <img className="corner-flora tr" src="/invite/corner2.png" alt="" />
+
         <p className="sec-label">Getting to know us</p>
         <h2 className="sec-title">Meet The Couple</h2>
-        <p className="sec-sub">Two hearts, one beautiful journey together.</p>
+        <p className="sec-sub">
+          Two hearts, one beautiful journey together.
+        </p>
+
         <div className="couple-row">
           <article className="person">
             <div className="frame">
@@ -150,6 +218,7 @@ export function InviteExperience() {
             <h3>{GROOM}</h3>
             <p>Son of {invite.groomParents}</p>
           </article>
+
           <article className="person">
             <div className="frame">
               <img src="/invite/bride.png" alt="Farhat Lamisa Diya" />
@@ -159,31 +228,48 @@ export function InviteExperience() {
             <p>Daughter of {invite.brideParents}</p>
           </article>
         </div>
-        <p className="quote">“Two souls, one heart — joined by faith and a promise of forever.”</p>
+
+        <p className="quote">
+          “Two souls, one heart — joined by faith and a promise of forever.”
+        </p>
       </section>
 
-      <section className="wine-band section center">
+      {/* SAVE THE DATE */}
+      <section
+        className="wine-band section center"
+        style={burgundyBackground}
+      >
         <Petals count={14} />
+
         <p className="sec-label">A little surprise</p>
         <h2 className="sec-title">Save The Date</h2>
+
         <p className="sec-sub">
           Behind this seal lies a date that will begin our forever.
           {!dateOpen && " Pull down to discover our special day."}
         </p>
+
         <div
           className="pull-card"
           onPointerDown={(e) => {
             if (dateOpen) return;
+
             dragRef.current = e.clientY;
+
             (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
           }}
           onPointerMove={(e) => {
             if (dateOpen || dragRef.current === 0) return;
-            setDrag(Math.max(0, Math.min(90, e.clientY - dragRef.current)));
+
+            setDrag(
+              Math.max(0, Math.min(90, e.clientY - dragRef.current))
+            );
           }}
           onPointerUp={() => {
             if (dateOpen) return;
+
             if (drag > 48) setDateOpen(true);
+
             setDrag(0);
             dragRef.current = 0;
           }}
@@ -192,7 +278,10 @@ export function InviteExperience() {
             <div className="revealed">
               <p className="role">We’re getting married</p>
               <strong>{DATE_LABEL}</strong>
-              <p>{invite.time} · {VENUE}</p>
+              <p>
+                {invite.time} · {VENUE}
+              </p>
+
               <div className="count">
                 <div>
                   <b>{tick.d}</b>
@@ -217,41 +306,62 @@ export function InviteExperience() {
               className="date-seal"
               style={{ transform: `translateY(${drag}px)` }}
               onClick={() => setDateOpen(true)}
+              aria-label="Open wedding date"
             >
-              PULL
-              <span className="pull-note">PULL DOWN TO REVEAL</span>
+              <img
+                src="/invite/Seal.png"
+                alt="Shadman and Diya wax seal"
+                className="date-seal-image"
+              />
+              <span className="pull-note">PULL DOWN</span>
             </button>
           )}
         </div>
       </section>
 
+      {/* PHOTO MEMORIES */}
       <section className="paper section center">
         <Petals count={8} />
+
         <p className="sec-label">Captured moments</p>
         <h2 className="sec-title">Photo Memories</h2>
-        <p className="sec-sub">Every smile, every laugh, every stolen glance — captured forever.</p>
+        <p className="sec-sub">
+          Every smile, every laugh, every stolen glance — captured forever.
+        </p>
+
         <div className="lights">
           <div className="wire" />
+
           {[8, 22, 36, 50, 64, 78, 92].map((left) => (
-            <span key={left} className="bulb" style={{ left: `${left}%` }} />
+            <span
+              key={left}
+              className="bulb"
+              style={{ left: `${left}%` }}
+            />
           ))}
+
           <div className="polaroid" key={photo}>
             <img src={PHOTOS[photo]} alt="" />
           </div>
+
           <p className="counter">
-            {String(photo + 1).padStart(2, "0")} / {String(PHOTOS.length).padStart(2, "0")}
+            {String(photo + 1).padStart(2, "0")} /{" "}
+            {String(PHOTOS.length).padStart(2, "0")}
           </p>
         </div>
       </section>
 
+      {/* WEDDING FUNCTIONS */}
       <section className="paper section">
         <Petals count={6} />
+
         <div className="book-stage">
           {book === "cover" && (
             <button className="cover" onClick={() => setBook("open")}>
               <p className="role">Together</p>
               <h3>Wedding Functions</h3>
               <p>We would love to see you at each one.</p>
+
               <ul>
                 {EVENTS.map((item) => (
                   <li key={item.title}>
@@ -260,33 +370,55 @@ export function InviteExperience() {
                   </li>
                 ))}
               </ul>
+
               <p className="tap-cover">TAP THE COVER TO OPEN</p>
             </button>
           )}
+
           {book === "open" && (
             <div className="spread">
               <div className="page">
-                <p className="role">Event · {String(page + 1).padStart(2, "0")}</p>
+                <p className="role">
+                  Event · {String(page + 1).padStart(2, "0")}
+                </p>
                 <img src={event.image} alt="" />
                 <p>{event.blurb}</p>
               </div>
+
               <div className="page">
                 <h3>{event.title}</h3>
                 <p>{event.when}</p>
                 <p>{event.time}</p>
                 <p>{VENUE_FULL}</p>
+
                 <div className="actions">
-                  <a className="pill" href={MAPS} target="_blank" rel="noreferrer">
+                  <a
+                    className="pill"
+                    href={MAPS}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     Get Directions
                   </a>
-                  <a className="ghost" href={calendarUrl(event.title)} target="_blank" rel="noreferrer">
+
+                  <a
+                    className="ghost"
+                    href={calendarUrl(event.title)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     Add to Calendar
                   </a>
-                  <button className="ghost" onClick={() => setBook("cover")}>
+
+                  <button
+                    className="ghost"
+                    onClick={() => setBook("cover")}
+                  >
                     Close
                   </button>
                 </div>
               </div>
+
               <div className="nav-row">
                 <button
                   className="ghost"
@@ -295,14 +427,20 @@ export function InviteExperience() {
                 >
                   Previous
                 </button>
+
                 <span className="counter">
-                  {String(page + 1).padStart(2, "0")} / {String(EVENTS.length).padStart(2, "0")}
+                  {String(page + 1).padStart(2, "0")} /{" "}
+                  {String(EVENTS.length).padStart(2, "0")}
                 </span>
+
                 <button
                   className="ghost"
                   onClick={() => {
-                    if (page >= EVENTS.length - 1) setBook("back");
-                    else setPage((n) => n + 1);
+                    if (page >= EVENTS.length - 1) {
+                      setBook("back");
+                    } else {
+                      setPage((n) => n + 1);
+                    }
                   }}
                 >
                   {page >= EVENTS.length - 1 ? "End" : "Next"}
@@ -310,58 +448,92 @@ export function InviteExperience() {
               </div>
             </div>
           )}
+
           {book === "back" && (
-            <button className="back-cover" onClick={() => setBook("cover")}>
+            <button
+              className="back-cover"
+              onClick={() => setBook("cover")}
+            >
               <p>We can’t wait to celebrate with you</p>
             </button>
           )}
         </div>
       </section>
 
-      <div className="torn" />
-      <section className="wine-band section center">
+      {/* TORN STRIP */}
+      <div className="torn" style={burgundyBackground} />
+
+      {/* VENUE */}
+      <section
+        className="wine-band section center"
+        style={burgundyBackground}
+      >
         <p className="sec-label">Find us</p>
         <h2 className="sec-title">The Venue</h2>
         <p className="sec-sub">Where hearts unite</p>
+
         <div className="venue-layout">
           <img src="/invite/venue.jpg" alt="Wedding mandap at ICCB" />
+
           <div className="venue-copy">
             <p className="role">The venue</p>
             <h3>{VENUE}</h3>
             <p>{VENUE_FULL}</p>
+
             <p>
               {DATE_LABEL}
               <br />
               {invite.time}
             </p>
+
             <div className="actions">
-              <a className="pill" href={MAPS} target="_blank" rel="noreferrer">
+              <a
+                className="pill"
+                href={MAPS}
+                target="_blank"
+                rel="noreferrer"
+              >
                 Open in Maps
               </a>
             </div>
           </div>
         </div>
       </section>
-      <div className="torn" style={{ transform: "scaleY(-1)" }} />
 
+      <div
+        className="torn"
+        style={{
+          ...burgundyBackground,
+          transform: "scaleY(-1)",
+        }}
+      />
+
+      {/* CLOSING */}
       <footer className="paper closing">
         <Petals count={12} />
-        <p className="closing-quote">“Two souls, one heart, one beautiful journey.”</p>
-        <div className="mini-seal">S & D</div>
+
+        <p className="closing-quote">
+          “Two souls, one heart, one beautiful journey.”
+        </p>
+
+        <div className="mini-seal">
+          <img src="/invite/Seal.png" alt="Wedding wax seal" />
+        </div>
+
         <p className="closing-names">
           {GROOM} & {BRIDE}
         </p>
-        <p className="thanks">Thank you for being part of our celebration</p>
+
+        <p className="thanks">
+          Thank you for being part of our celebration
+        </p>
+
         <p>
-          {DATE_LABEL}
           <br />
-          {VENUE}
         </p>
       </footer>
+
       <style jsx>{`
-        /* The supplied reference artwork is used directly so its parchment,
-           torn burgundy edges, carved rollers, wax seal, flowers and layout
-           stay visually identical instead of being approximated in CSS. */
         .scroll-reference-section {
           position: relative;
           isolation: isolate;
@@ -400,17 +572,27 @@ export function InviteExperience() {
         }
 
         @media (min-width: 1000px) {
-          .scroll-reference-art { width: min(100%, 720px); }
+          .scroll-reference-art {
+            width: min(100%, 720px);
+          }
         }
 
         @media (max-width: 600px) {
-          .scroll-reference-art { width: 100%; }
-          .scroll-reference-art { clip-path: inset(49.5% 0 49.5% 0); }
-          .scroll-reference-art.is-open { clip-path: inset(0); }
+          .scroll-reference-art {
+            width: 100%;
+            clip-path: inset(49.5% 0 49.5% 0);
+          }
+
+          .scroll-reference-art.is-open {
+            clip-path: inset(0);
+          }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .scroll-reference-art { transition: none; transform: none; }
+          .scroll-reference-art {
+            transition: none;
+            transform: none;
+          }
         }
       `}</style>
     </main>
