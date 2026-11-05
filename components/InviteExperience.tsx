@@ -108,12 +108,11 @@ export function InviteExperience() {
     audio.loop = true;
 
     audio.play().catch(() => {
-      // Browser may block autoplay.
-      // Visitor can start music using the floating button.
+      
     });
   }, [phase]);
 
-  // Automatically open the invitation scroll
+  
   useEffect(() => {
     if (phase !== "burst") return;
 
@@ -264,13 +263,10 @@ const EVENTS = [...invite.events].sort(
       <header className="hero">
         <img className="hero-bg" src="/invite/hero.jpg" alt="" />
         <div className="hero-shade" />
-
         <span className="lantern left" />
         <span className="lantern right" />
-
         <div className="hero-copy">
           <p className="kicker">The wedding invitation of</p>
-
           <h1 className="script-names">
             {GROOM}
             <em>&</em>
@@ -296,16 +292,17 @@ const EVENTS = [...invite.events].sort(
       </section>
 
       {/* MEET THE COUPLE */}
+      
       <section className="paper section center">
+      <GoldPetals count={10}/>
+      <Petals count={10}/>
         <img className="corner-flora tl" src="/invite/corner2.png" alt="" />
         <img className="corner-flora tr" src="/invite/corner2.png" alt="" />
-
         <p className="sec-label">Getting to know us</p>
         <h2 className="sec-title">Meet The Couple</h2>
         <p className="sec-sub">
           Two hearts, one beautiful journey together.
         </p>
-
         <div className="couple-row">
           <article className="person">
             <div className="frame">
@@ -315,7 +312,6 @@ const EVENTS = [...invite.events].sort(
             <h3>{GROOM}</h3>
             <p>Son of {invite.groomParents}</p>
           </article>
-
           <article className="person">
             <div className="frame">
               <img src="/invite/bride.png" alt="Farhat Lamisa Diya" />
@@ -325,7 +321,6 @@ const EVENTS = [...invite.events].sort(
             <p>Daughter of {invite.brideParents}</p>
           </article>
         </div>
-
         <p className="quote">
           “Two souls, one heart — joined by faith and a promise of forever.”
         </p>
@@ -337,15 +332,13 @@ const EVENTS = [...invite.events].sort(
         style={burgundyBackground}
       >
         <Petals count={14} />
-<GoldPetals count={14} />
+        <GoldPetals count={14} />
         <p className="sec-label">A little surprise</p>
         <h2 className="sec-title">Save The Date</h2>
-
         <p className="sec-sub">
           Behind this seal lies a date that will begin our forever.
           {!dateOpen && " Pull down to discover our special day."}
         </p>
-
         <div
           className="pull-card"
           onPointerDown={(e) => {
@@ -416,10 +409,10 @@ const EVENTS = [...invite.events].sort(
         </div>
       </section>
 
-     {/**  {/* PHOTO MEMORIES */}
+     {/* PHOTO MEMORIES */}
       <section className="paper section center">
         <Petals count={15} />
-<GoldPetals count={15}/>
+        <GoldPetals count={15}/>
         <p className="sec-label">Captured moments</p>
         <h2 className="sec-title">Photo Memories</h2>
         <p className="sec-sub">
@@ -453,8 +446,8 @@ const EVENTS = [...invite.events].sort(
       <Petals count={10} />
       <GoldPetals count={10} />
 
-  <div className="book-stage">
-    {book === "cover" && (
+      <div className="book-stage">
+      {book === "cover" && (
       <button
         className="cover"
         onClick={() => {
@@ -464,7 +457,6 @@ const EVENTS = [...invite.events].sort(
       ><h3>Wedding Functions</h3>
         <p className="role">Together</p>
         <p>We would love to see you at each one.</p>
-
         <ul>
           {EVENTS.map((item) => (
             <li key={item.title}>
@@ -478,7 +470,7 @@ const EVENTS = [...invite.events].sort(
       </button>
     )}
 
-    {book === "open" && (
+      {book === "open" && (
       <div className="spread">
         {/* LEFT PAGE */}
         <div className="page">
@@ -502,7 +494,7 @@ const EVENTS = [...invite.events].sort(
               className="pill"
               href={
                 event.title === "Holud"
-                  ? "https://www.google.com/maps/search/?api=1&query=Lazzi+Polli+Resort"
+                  ? "https://www.google.com/maps/dir/Kollol+Resort,+Plot-9%2F9A,Road-1B,+Block-N+Modhumoti+Model+Town+St,+Aminbazar,+1205/Kollol+Resort,+Plot-9%2F9A,Road-1B,+Block-N+Modhumoti+Model+Town+St,+Aminbazar,+1205/@23.7509527,90.3654215,15z/data=!4m13!4m12!1m5!1m1!1s0x3755bf40aecc767f:0xe12adb6847cd7dd4!2m2!1d90.2995627!2d23.7820409!1m5!1m1!1s0x3755bf40aecc767f:0xe12adb6847cd7dd4!2m2!1d90.2995627!2d23.7820409?entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D"
                   : MAPS
               }
               target="_blank"

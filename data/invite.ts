@@ -18,14 +18,16 @@ export const invite = {
       dateISO: "2027-01-01T18:00:00+06:00", 
       when: "Friday, 1 January 2027", 
       time: "Evening", 
-      place: "ICCB, Dhaka", 
+      place: "ICCB Hall-1, Dhaka", 
       blurb: "An evening of love, elegance, and celebration as we come together to honour the newlyweds and celebrate the beginning of their forever. A night made special by the presence of our beloved family and friends.", 
       image: "/invite/event.jpg" },
-    { title: "Holud", 
+    
+      { 
+      title: "Holud", 
       dateISO: "2026-12-26T18:00:00+06:00", 
       when: "Saturday, 26 December 2026", 
-      time: "Evening", 
-      place:"Lazzi Polli Resort", 
+      time: "Morning", 
+      place:"Kollol Resort", 
       blurb: "A traditional pre-wedding celebration filled with turmeric, blessings, music, laughter, and the warmth of family and friends as we celebrate the bride and groom before their big day.", 
       image: "/invite/holud.png" }
   ]

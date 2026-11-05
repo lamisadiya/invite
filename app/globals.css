@@ -338,24 +338,69 @@ img { max-width: 100%; }
   flex-wrap: wrap;
 }
 .person { width: min(100%, 240px); text-align: center; }
+.person {
+  width: min(100%, 240px);
+  text-align: center;
+}
+
 .frame {
   width: 210px;
   height: 210px;
   margin: 0 auto 14px;
   border-radius: 50%;
-  padding: 10px;
+  padding: 9px;
+  position: relative;
+
   background:
-    radial-gradient(circle at 30% 30%, #f3e2b0, #b8893e 45%, #f7e7c0 70%, #8d6428);
+    linear-gradient(
+      135deg,
+      #fff4c9 0%,
+      #d6ad58 15%,
+      #8f6328 30%,
+      #f5dfa0 48%,
+      #a77932 68%,
+      #fff0bd 85%,
+      #8d6428 100%
+    );
+
   box-shadow:
-    0 0 0 6px rgba(196, 161, 90, 0.25),
-    0 14px 28px rgba(70, 30, 20, 0.15);
+    0 0 0 2px #6e2638,
+    0 0 0 5px #c99c4c,
+    0 0 0 8px rgba(201, 156, 76, 0.3),
+    0 12px 30px rgba(55, 15, 25, 0.25),
+    inset 0 0 8px rgba(80, 35, 10, 0.5);
 }
+
+/* Inner decorative gold ring */
+.frame::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1px solid #fff0bd;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Fine outer gold detailing */
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1px solid rgba(177, 132, 54, 0.85);
+  pointer-events: none;
+}
+
 .frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  border: 4px solid #fbf6ec;
+  border: 4px solid #fbf2dd;
+  box-shadow:
+    inset 0 0 12px rgba(75, 30, 15, 0.2);
+  display: block;
 }
 .role {
   letter-spacing: 0.2em;
@@ -545,7 +590,6 @@ img { max-width: 100%; }
   color: #e8d3a1;
   padding: 42px 28px;
   text-align: center;
-
   box-shadow:
     inset 5px 0 8px rgba(20, 4, 8, 0.38),
     inset -2px 0 4px rgba(255, 220, 160, 0.12),
@@ -565,7 +609,6 @@ img { max-width: 100%; }
   content: "";
   position: absolute;
   inset: 17px;
-  /*border: 1px solid rgba(220, 185, 112, 0.65);*/
   border-radius: 2px 6px 6px 2px;
   pointer-events: none;
 }
@@ -580,7 +623,6 @@ img { max-width: 100%; }
   width: 17px;
   height: 100%;
   border-radius: 5px 0 0 5px;
-
   background: linear-gradient(
     90deg,
     #310b16 0%,
@@ -649,11 +691,9 @@ img { max-width: 100%; }
   width: min(100%, 760px);
   display: grid;
   grid-template-columns: 1fr 1fr;
-
   background: #f9f0df;
   border-radius: 4px 9px 9px 4px;
   overflow: hidden;
-
   box-shadow:
     0 5px 0 #e9ddc8,
     0 9px 0 #f5ead8,
@@ -896,7 +936,6 @@ img { max-width: 100%; }
   max-height: 0;
   opacity: 0;
   padding: 0 34px;
-
   background:
     radial-gradient(ellipse at center, #fff9eb 0%, transparent 75%),
     linear-gradient(90deg, #e9d9bc 0%, #f8efdf 9%, #f8efdf 91%, #e9d9bc 100%);
@@ -991,21 +1030,15 @@ img { max-width: 100%; }
 .roller-cap.left {
   left: -3px;
 }
-
 .roller-cap.right {
   right: -3px;
 }
-
-/* INITIALLY BOTH ROLLERS ARE TOGETHER */
 .roller-top {
   top: 0;
 }
-
 .roller-bottom {
   top: 0;
 }
-
-/* WHEN OPENED */
 .scroll.is-open .roller-top {
   top: 0;
 }
@@ -1536,6 +1569,3 @@ button {
   0% { transform: translateY(-10px) rotate(0deg); }
   100% { transform: translateY(70px) rotate(20deg); }
 }
-
-
-
