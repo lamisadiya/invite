@@ -449,9 +449,9 @@ const EVENTS = [...invite.events].sort(
       </section>
 
       {/* WEDDING FUNCTIONS */}
-<section className="paper section">
-  <Petals count={10} />
-  <GoldPetals count={10} />
+      <section className="paper section">
+      <Petals count={10} />
+      <GoldPetals count={10} />
 
   <div className="book-stage">
     {book === "cover" && (
@@ -463,9 +463,6 @@ const EVENTS = [...invite.events].sort(
         }}
       ><h3>Wedding Functions</h3>
         <p className="role">Together</p>
-
-        
-
         <p>We would love to see you at each one.</p>
 
         <ul>
@@ -497,13 +494,9 @@ const EVENTS = [...invite.events].sort(
         {/* RIGHT PAGE */}
         <div className="page">
           <h3>{event.title}</h3>
-
           <p>{event.when}</p>
-
           <p>{event.time}</p>
-
           <p>{event.place}</p>
-
           <div className="actions">
             <a
               className="pill"

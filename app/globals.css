@@ -565,7 +565,7 @@ img { max-width: 100%; }
   content: "";
   position: absolute;
   inset: 17px;
-  border: 1px solid rgba(220, 185, 112, 0.65);
+  /*border: 1px solid rgba(220, 185, 112, 0.65);*/
   border-radius: 2px 6px 6px 2px;
   pointer-events: none;
 }
