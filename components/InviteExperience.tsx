@@ -284,7 +284,7 @@ const EVENTS = [...invite.events].sort(
           className={`scroll-reference-art${scrollOpen ? " is-open" : ""}`}
         >
           <img
-            src="/invite/wedding-scroll-reference.png"
+            src="/invite/scroll.png"
             alt={`Vintage parchment wedding invitation for ${BRIDE} and ${GROOM}`}
             className="scroll-reference-image"
           />
