@@ -1,4 +1,4 @@
-import { InviteExperience } from "@/components/InviteExperience(4)";
+import { InviteExperience } from "@/components/InviteExperience";
 
 export default function Home() {
   return <InviteExperience />;
