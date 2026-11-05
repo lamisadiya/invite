@@ -286,7 +286,7 @@ const EVENTS = [...invite.events].sort(
           <img
             src="/invite/scroll.png"
             alt={`Vintage parchment wedding invitation for ${BRIDE} and ${GROOM}`}
-            className="scroll-reference-image"
+            className="scroll image"
           />
         </div>
       </section>
