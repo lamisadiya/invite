@@ -261,7 +261,7 @@ const EVENTS = [...invite.events].sort(
       </button>
 
       <header className="hero">
-        <img className="hero-bg" src="/invite/hero.jpg" alt="" />
+        <img className="hero-bg" src="/invite/hero1.png" alt="" />
         <div className="hero-shade" />
         <span className="lantern left" />
         <span className="lantern right" />
@@ -494,7 +494,7 @@ const EVENTS = [...invite.events].sort(
               className="pill"
               href={
                 event.title === "Holud"
-                  ? "https://www.google.com/maps/dir/Kollol+Resort,+Plot-9%2F9A,Road-1B,+Block-N+Modhumoti+Model+Town+St,+Aminbazar,+1205/Kollol+Resort,+Plot-9%2F9A,Road-1B,+Block-N+Modhumoti+Model+Town+St,+Aminbazar,+1205/@23.7509527,90.3654215,15z/data=!4m13!4m12!1m5!1m1!1s0x3755bf40aecc767f:0xe12adb6847cd7dd4!2m2!1d90.2995627!2d23.7820409!1m5!1m1!1s0x3755bf40aecc767f:0xe12adb6847cd7dd4!2m2!1d90.2995627!2d23.7820409?entry=ttu&g_ep=EgoyMDI2MTEwMi4wIKXMDSoASAFQAw%3D%3D"
+                  ? "https://maps.app.goo.gl/B3Q12G4iSHvsgZv16?g_st=ic"
                   : MAPS
               }
               target="_blank"
